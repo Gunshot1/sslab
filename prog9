@@ -1,0 +1,92 @@
+9.	Design, develop and implement a C/C++/Java program to implement page replacement algorithms LRU and FIFO. Assume suitable input required to demonstrate the results.
+
+LRU:
+#include<stdio.h>
+#include<stdlib.h>
+
+char frm[10],s[20];
+void main()
+{
+	int m=0,k,f=3,l,i=0,flag=0;
+	printf("enter the frame size\n");
+	scanf("%d",&f);
+	printf("enter the characters(or)no of pages required\n");
+	scanf("%d",&l);
+	printf("enter the 10 characters\n",l);
+	scanf("%s",s);
+	printf("page frame res\n");
+	for(i=0;i<l;i++)
+	{
+		flag=0;
+		for(k=0;k<f;k++)
+			if(s[i]==frm[k])
+			{
+				flag=1;
+				break;
+			}
+		if(m<f && flag==0)
+		{
+			frm[m]=s[i];
+			m++;
+			printf("%c\t%s\t page fault\n",s[i],frm);
+		}
+		else if(flag!=1)
+		{
+			for(k=0;k<m-1;k++)
+			frm[k]=frm[k+1];
+			frm[k]=s[i];
+			printf("%c\t%s\t page fault \n",s[i],frm);
+		}
+		else
+		{
+			for(k=k;k<m-1;k++)
+			frm[k]=frm[k+1];
+			frm[k]=s[i];
+			printf("%c\t%s\t no page fault \n",s[i],frm);
+		}
+	}
+}
+				
+FIFO:
+#include<stdio.h>
+#include<stdlib.h>
+
+char frm[10],s[20];
+void main()
+{
+	int m=0,k,f=3,l,i=0,flag=0;
+	printf("enter the frame size\n");
+	scanf("%d",&f);
+	printf("enter the characters(or)no of pages required\n");
+	scanf("%d",&l);
+	printf("enter the 10 characters\n",l);
+	scanf("%s",s);
+	printf("page frame res\n");
+	for(i=0;i<l;i++)
+	{
+		flag=0;
+		for(k=0;k<f;k++)
+			if(s[i]==frm[k])
+			{
+				flag=1;
+				break;
+			}
+		if(m<f && flag==0)
+		{
+			frm[m]=s[i];
+			m++;
+			printf("%c\t%s\t page fault\n",s[i],frm);
+		}
+		else if(flag!=1)
+		{
+			for(k=0;k<m-1;k++)
+			frm[k]=frm[k+1];
+			frm[k]=s[i];
+			printf("%c\t%s\t page fault \n",s[i],frm);
+		}
+		else
+		{
+			printf("%c\t%s\t no page fault \n",s[i],frm);
+		}
+	}
+}
