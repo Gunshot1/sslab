@@ -1,0 +1,76 @@
+3.	Design, develop and implement YACC/C program to construct Predictive / LL(1) Parsing Table for the grammar rules: AaBa , BbB | . Use this table to parse the sentence: abba$
+
+#include<stdio.h>
+//#include<conio.h>
+#include<stdlib.h>
+#include<string.h>
+void main()
+{
+char M[3][4][10]={"NT/T","a","b","$","A","aBa","Error","Error","B","@","bB","Error"};
+	char input[20],stack[20],temp[20];
+	int i,j,k,T,NT,top=-1;
+	//clrscr();
+	printf("LL-1 predective parsing table is \n");
+	for(i=0;i<3;i++)
+	{
+		for(j=0;j<4;j++)
+			printf("%s\t",M[i][j]);
+		printf("\n");
+	}
+	printf("Enter the String to be parsed\n");
+	scanf("%s",input);
+	input[strlen(input)]='$';
+	stack[++top]='$';
+	stack[++top]='A';
+	i=j=k=0;
+	while(stack[top]!='$' || input[i]!='$')
+	{
+		if(stack[top]>64 && stack[top]<91)
+		{
+			switch(stack[top])
+			{
+				case 'A': NT=1; break;
+				case 'B': NT=2; break;
+			}
+			//if stack top is non-terminal
+			switch(input[i])
+			{
+				case 'a': T=1; break;
+				case 'b': T=2; break;
+				case '$': T=3; break;
+				default : printf("\n Error while parsing the string \n");
+				exit(0);
+			}
+			strcpy(temp,M[NT][T]);
+			if(strcmp(temp,"Error")==0)
+			{
+				printf("\n Error while parsing the string \n");
+				exit(0);
+			}
+			else if(strcmp(temp,"@")==0)
+				top--;
+			else
+			{
+				top--;
+				for(k=strlen(temp)-1;k>=0;k--)
+					stack[++top]=temp[k];
+			}
+		}
+		else //if stack top is terminal
+		{
+			if(stack[top]==input[i])
+			{
+				top--;
+				i++;
+			}
+			else
+			{
+				printf("\n Error while parsing the string \n");
+				exit(0);
+			}
+		}
+	}
+	printf("String belongs to given grammar \n");
+	//getch();
+}
+
