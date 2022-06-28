@@ -1,0 +1,80 @@
+6.	a) Write a LEX program to eliminate comment lines in a C program and copy the resulting program into a separate file.
+%{
+#include<stdio.h>
+#include<stdlib.h>
+I	nt l=0;
+%}
+
+%%
+"/*"[^*]*"*/"	l++;
+"//".*			l++;
+%%
+int main()
+{
+yyin=fopen("new.c","r");
+ 	yyout=fopen("new1.c","w");
+
+   	yylex();
+
+	fclose(yyin);
+	fclose(yyout);
+printf("no of comment lines are =%d \n",l);
+}
+
+
+
+
+6.	b). Write YACC program to recognize valid identifier, operators and keywords in   
+          the given text (C program) file.
+LEX PART:
+
+%{
+    
+   	#include "y.tab.h"
+   	extern int yylval;
+%}
+
+%%
+int|char|float|if|else|printf	        {printf("keyword   is - %s \n",yytext); return key;}
+[a-zA-Z][a-zA-Z0-9]*	        {printf("identifier is- %s \n",yytext); return id;}
+[*+-/(),<>=]			        {printf("operator  is - %s \n",yytext); return op;}  		
+[0-9]+   			        {printf("number  is- %s \n",yytext); return num;}
+.                         		         ;
+\n				         ;
+"\"".*"\""			        {printf("string  is- %s \n",yytext);}
+%%
+YACC PART:
+%{
+    	#include<stdio.h>
+    	#include<stdlib.h>
+   	 int k=0,i=0,n=0,opr=0;
+   	 extern FILE *yyin; 
+%}
+
+%token num id op key
+
+%%
+s: key    	{k++;}
+ | op	  	{opr++;}
+ | num 	{n++;}
+ | id 		{i++;}
+ | id  s		{i++;}
+ | num s	{n++;}
+ | op  s	{opr++;}
+ | key s          {k++;}
+ ;
+%%
+void main()
+{
+ yyin=fopen("input.c","r");
+   	 while(!feof(yyin))
+     	 yyparse();
+  
+printf(" \n key=%d and op=%d and id=%d and num=%d",k,opr,i,n);
+}
+
+yyerror()
+{
+ printf("invalid\n");
+ 	exit(0);
+}
