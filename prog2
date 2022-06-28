@@ -1,0 +1,43 @@
+2.	Develop, Implement and Execute a program using YACC tool to recognize all strings ending with b preceded by n a’s using the grammar an b (note: input n value)
+%{
+#include<stdio.h>
+ 	#include<stdlib.h>
+   	int n,count=0;
+%}
+
+%token a b
+
+%%
+start:s'\n'  {if (count==n) 
+                	 printf("valid\n");
+                 else 
+                	 printf("Invalid \n");}
+
+s:a s 	    {count++;} 
+ |b 		
+ ;
+%%
+
+void main()
+{
+ printf("enter the value of n \n");
+ 	 scanf("%d",&n);
+    	 getchar();
+  	 printf("enter the string \n");
+ 	 yyparse();
+}
+
+yylex()
+{
+  char c;
+ 	  c=getchar();
+  	  if(c=='a') return a;
+   	  if (c=='b') return b;
+   	  return c;
+}
+
+int yyerror()
+{
+ 	 printf("error \n");
+  exit(0);
+}
