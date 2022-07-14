@@ -76,3 +76,9 @@ void Reduce()
         		}
    }
 
+
+
+o/p:
+$cc 4.c
+$./a.out
+$
