@@ -22,6 +22,12 @@ printf("no of comment lines are =%d \n",l);
 }
 
 
+o/p:
+$lex 6a.l
+$cc lex.yy.c -ll
+$./a.out
+$cat new.c
+$cat new1.c
 
 
 6.	b). Write YACC program to recognize valid identifier, operators and keywords in   
@@ -78,3 +84,12 @@ yyerror()
  printf("invalid\n");
  	exit(0);
 }
+
+
+o/p:
+$lex 6b.l
+$yacc -d 6b.y
+$cc lex.yy.c y.tab.c -ll
+$./a.out
+$cat input.c
+
