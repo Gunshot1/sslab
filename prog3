@@ -74,3 +74,9 @@ char M[3][4][10]={"NT/T","a","b","$","A","aBa","Error","Error","B","@","bB","Err
 	//getch();
 }
 
+
+o/p:
+$cc 3.c
+$./a.out
+$
+
