@@ -41,3 +41,11 @@ int yyerror()
  	 printf("error \n");
   exit(0);
 }
+
+
+
+o/p:
+
+$yacc -d 2yacc.y
+$cc y.tab.c -ll
+$./a.out
