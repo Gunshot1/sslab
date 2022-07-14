@@ -21,7 +21,9 @@ void main()
 		printf("operators=%d and identifiers=%d\n",op,id);
 }
 
-
+o/p:
+$cc lex.yy.c -ll
+$./a.out
 
 
 1.	b. Write YACC program to evaluate arithmetic expression involving operators: +, -, *, and /
@@ -77,3 +79,10 @@ yyerror()
 printf("invalid\n");
 exit(0);
 }
+
+
+o/p:
+$lex 1b.l
+$yacc -d 1b.y
+$cc lex.yy.c y.tab.c
+$./a.out
