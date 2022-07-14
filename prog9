@@ -90,3 +90,9 @@ void main()
 		}
 	}
 }
+
+
+
+o/p:
+$cc lru.c
+$./a.out
