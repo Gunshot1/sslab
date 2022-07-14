@@ -49,3 +49,9 @@ void main()
 fclose(fp1);
 }
 
+
+
+o/p:
+$cc 5.c
+$./a.out
+$
